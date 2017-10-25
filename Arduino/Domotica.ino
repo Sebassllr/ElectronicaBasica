@@ -4,35 +4,52 @@
 
 float Sensibilidad = 0.094; //sensibilidad en V/A para nuestro sensor
 float offset = 0.100; // Equivale a la amplitud del ruido
-const float POTENCIA_MAXIMA = 50;//Cambiar
-int ledAlerta;//Iniciar estos leds
-int ledNormal;
+const float POTENCIA_MAXIMA = 35;//Cambiar
+int ledAlerta = 9;//Iniciar estos leds
+int ledNormal = 11;
 LiquidCrystal_I2C lcd(0x3F,16,2);
-
+int contar = 0;
 
 void setup() {  
   Serial.begin(9600);
   lcd.init();
   lcd.backlight();
   lcd.clear();
+  lcd.setCursor(0,0);
+
   pinMode(ledAlerta,OUTPUT);
   pinMode(ledNormal,OUTPUT);
+  pinMode(7,OUTPUT);
+  pinMode(8,OUTPUT);
+  digitalWrite(7,LOW);
+  digitalWrite(8,LOW);
+  digitalWrite(ledNormal,HIGH);
+  delay(500);
 }
 
 void loop() {   
   float P=get_potencia(); // P=IV watts
+
   escribir_potencia();
-  Serial.print("Potencia: ");
-  Serial.print(P,3);  
+  Serial.print("Potencia total: ");
+  Serial.print(P, 3);  
   Serial.println("W");
   verificar(P);
-  delay(500);     
+  delay(500);
+  contar++;
 }
 
 void verificar(int potencia){
   if(potencia > POTENCIA_MAXIMA){
+    digitalWrite(ledNormal,LOW);
+    digitalWrite(ledAlerta,HIGH);
+    delay(10000);
+    digitalWrite(8,HIGH);    
+    delay(1000);
     alerta();
+    
   }else{
+
     digitalWrite(ledAlerta,LOW);
     digitalWrite(ledNormal,HIGH);
   }
@@ -43,7 +60,7 @@ void alerta(){
   //Es el método para cuando hay consumo excesivo, relés
 }
 
-float get_corriente()
+float get_corriente1()
 {
   float voltajeSensor;
   float corriente=0;
@@ -60,13 +77,36 @@ float get_corriente()
   return(((Imax-Imin)/2)-offset);
 }
 
+float get_corriente2()
+{
+  float voltajeSensor;
+  float corriente=0;
+  long tiempo=millis();
+  float Imax=0;
+  float Imin=0;
+  while(millis()-tiempo<500)//realizamos mediciones durante 0.5 segundos
+  { 
+    voltajeSensor = analogRead(A1) * (5.0 / 1023.0);//lectura del sensor
+    corriente=0.9*corriente+0.1*((voltajeSensor-2.515)/Sensibilidad); //Ecuación  para obtener la corriente
+    if(corriente>Imax)Imax=corriente;
+    if(corriente<Imin)Imin=corriente;
+  }
+  return(((Imax-Imin)/2)-offset);
+}
+
 float get_potencia(){
-  return get_corriente() * 110 * 0.707;
+  float p1 = get_corriente1() * 110 * 0.707;
+  float p2 = get_corriente2() * 110 * 0.707;
+  if (p1 < 9) p1 = 0;
+  if (p2 < 9) p2 = 0;
+ // Serial.println(get_corriente1());
+//  Serial.println(get_corriente2()); 
+  return p1 + p2;
 }
 
 void escribir_potencia(){
   lcd.setCursor(0,0);
-  lcd.print("Potencia: ");
+  lcd.print("Potencia:");
   lcd.print(get_potencia());
+  lcd.print("W");
 }
-
