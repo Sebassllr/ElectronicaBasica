@@ -1,5 +1,5 @@
 #include <Wire.h>
-
+#include <IRremote.h>
 #include <LiquidCrystal_I2C.h>
 
 float Sensibilidad = 0.094; //sensibilidad en V/A para nuestro sensor
@@ -7,11 +7,15 @@ float offset = 0.100; // Equivale a la amplitud del ruido
 const float POTENCIA_MAXIMA = 35;//Cambiar
 int ledAlerta = 9;//Iniciar estos leds
 int ledNormal = 11;
+int infrarojo;//ASIGNAR ESTE PIN
 LiquidCrystal_I2C lcd(0x3F,16,2);
 int contar = 0;
+IRrecv irrecv(infrarojo);
+decode_results results;
 
 void setup() {  
   Serial.begin(9600);
+  irrecv.enableIRIn();
   lcd.init();
   lcd.backlight();
   lcd.clear();
@@ -30,6 +34,27 @@ void setup() {
 void loop() {   
   float P=get_potencia(); // P=IV watts
 
+if (irrecv.decode(&results))
+  {
+    int valor = results.value;
+    switch (valor) {
+      case 0xFF6897:
+        //0
+        break;
+      case 0xFF30CF:
+        //1
+        break;
+      case 0xFF18E7:
+        //2
+        break;
+      case 0xFF7A85:
+        //3
+        break;
+      case 0xFF10EF:
+        //4
+        break;
+    }
+  }
   escribir_potencia();
   Serial.print("Potencia total: ");
   Serial.print(P, 3);  
@@ -110,3 +135,4 @@ void escribir_potencia(){
   lcd.print(get_potencia());
   lcd.print("W");
 }
+
