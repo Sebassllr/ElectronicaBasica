@@ -1,0 +1,144 @@
+[debug] [2017-11-16T22:44:14.811Z] ----------------------------------------------------------------------
+[debug] [2017-11-16T22:44:14.815Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Sllr\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase init funtions
+[debug] [2017-11-16T22:44:14.815Z] CLI Version:   3.15.1
+[debug] [2017-11-16T22:44:14.815Z] Platform:      win32
+[debug] [2017-11-16T22:44:14.815Z] Node Version:  v8.9.1
+[debug] [2017-11-16T22:44:14.816Z] Time:          Thu Nov 16 2017 17:44:14 GMT-0500 (SA Pacific Standard Time)
+[debug] [2017-11-16T22:44:14.817Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-11-16T22:44:15.147Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase"]
+[debug] [2017-11-16T22:44:15.148Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\Sllr
+
+Before we get started, keep in mind:
+
+  * You are initializing in an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2017-11-16T22:44:19.347Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects  
+ Thu Nov 16 2017 17:44:19 GMT-0500 (SA Pacific Standard Time)
+[debug] [2017-11-16T22:44:20.153Z] <<< HTTP RESPONSE 200
+[info] 
+=== Funtions Setup
+[debug] [2017-11-16T22:44:25.850Z] TypeError: features[nextFeature] is not a function
+    at init (C:\Users\Sllr\AppData\Roaming\npm\node_modules\firebase-tools\lib\init\index.js:14:46)
+    at C:\Users\Sllr\AppData\Roaming\npm\node_modules\firebase-tools\lib\init\index.js:15:14
+    at tryCatch (C:\Users\Sllr\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\rsvp\dist\rsvp.js:525:12)
+    at invokeCallback (C:\Users\Sllr\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\rsvp\dist\rsvp.js:538:13)
+    at publish (C:\Users\Sllr\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\rsvp\dist\rsvp.js:508:7)
+    at flush (C:\Users\Sllr\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\rsvp\dist\rsvp.js:2415:5)
+    at _combinedTickCallback (internal/process/next_tick.js:131:7)
+    at process._tickDomainCallback (internal/process/next_tick.js:218:9)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2017-11-16T22:44:30.442Z] ----------------------------------------------------------------------
+[debug] [2017-11-16T22:44:30.447Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Sllr\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase init funtions
+[debug] [2017-11-16T22:44:30.447Z] CLI Version:   3.15.1
+[debug] [2017-11-16T22:44:30.447Z] Platform:      win32
+[debug] [2017-11-16T22:44:30.447Z] Node Version:  v8.9.1
+[debug] [2017-11-16T22:44:31.037Z] Time:          Thu Nov 16 2017 17:44:30 GMT-0500 (SA Pacific Standard Time)
+[debug] [2017-11-16T22:44:31.037Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-11-16T22:44:31.076Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase"]
+[debug] [2017-11-16T22:44:31.077Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\Sllr
+
+Before we get started, keep in mind:
+
+  * You are initializing in an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2017-11-16T22:44:39.263Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects  
+ Thu Nov 16 2017 17:44:39 GMT-0500 (SA Pacific Standard Time)
+[debug] [2017-11-16T22:44:39.926Z] <<< HTTP RESPONSE 200
+[info] 
+=== Funtions Setup
+[debug] [2017-11-16T22:44:46.320Z] TypeError: features[nextFeature] is not a function
+    at init (C:\Users\Sllr\AppData\Roaming\npm\node_modules\firebase-tools\lib\init\index.js:14:46)
+    at C:\Users\Sllr\AppData\Roaming\npm\node_modules\firebase-tools\lib\init\index.js:15:14
+    at tryCatch (C:\Users\Sllr\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\rsvp\dist\rsvp.js:525:12)
+    at invokeCallback (C:\Users\Sllr\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\rsvp\dist\rsvp.js:538:13)
+    at publish (C:\Users\Sllr\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\rsvp\dist\rsvp.js:508:7)
+    at flush (C:\Users\Sllr\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\rsvp\dist\rsvp.js:2415:5)
+    at _combinedTickCallback (internal/process/next_tick.js:131:7)
+    at process._tickDomainCallback (internal/process/next_tick.js:218:9)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2017-11-16T22:44:51.897Z] ----------------------------------------------------------------------
+[debug] [2017-11-16T22:44:51.900Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Sllr\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase init funtions
+[debug] [2017-11-16T22:44:51.901Z] CLI Version:   3.15.1
+[debug] [2017-11-16T22:44:51.901Z] Platform:      win32
+[debug] [2017-11-16T22:44:51.901Z] Node Version:  v8.9.1
+[debug] [2017-11-16T22:44:51.903Z] Time:          Thu Nov 16 2017 17:44:51 GMT-0500 (SA Pacific Standard Time)
+[debug] [2017-11-16T22:44:51.903Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-11-16T22:44:51.925Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase"]
+[debug] [2017-11-16T22:44:51.926Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\Sllr
+
+Before we get started, keep in mind:
+
+  * You are initializing in an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2017-11-16T22:44:54.598Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects  
+ Thu Nov 16 2017 17:44:54 GMT-0500 (SA Pacific Standard Time)
+[debug] [2017-11-16T22:44:55.643Z] <<< HTTP RESPONSE 200
+[info] 
+=== Funtions Setup
+[debug] [2017-11-16T22:44:57.661Z] TypeError: features[nextFeature] is not a function
+    at init (C:\Users\Sllr\AppData\Roaming\npm\node_modules\firebase-tools\lib\init\index.js:14:46)
+    at C:\Users\Sllr\AppData\Roaming\npm\node_modules\firebase-tools\lib\init\index.js:15:14
+    at tryCatch (C:\Users\Sllr\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\rsvp\dist\rsvp.js:525:12)
+    at invokeCallback (C:\Users\Sllr\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\rsvp\dist\rsvp.js:538:13)
+    at publish (C:\Users\Sllr\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\rsvp\dist\rsvp.js:508:7)
+    at flush (C:\Users\Sllr\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\rsvp\dist\rsvp.js:2415:5)
+    at _combinedTickCallback (internal/process/next_tick.js:131:7)
+    at process._tickDomainCallback (internal/process/next_tick.js:218:9)
+[error] 
+[error] Error: An unexpected error has occurred.
