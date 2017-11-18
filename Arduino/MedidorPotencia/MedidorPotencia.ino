@@ -1,3 +1,4 @@
+#include <DS1302.h>
 #include <Wire.h>
 #include <IRremote.h>
 #include <LiquidCrystal_I2C.h>
@@ -5,15 +6,25 @@
 float sensibilidad = 0.085;
 float offset = 0.100; // Equivale a la amplitud del ruido
 const float POTENCIA_MAXIMA = 60;//Cambiar
-int ledAlerta = 9;//Iniciar estos leds
+float potenciaDia = 0;
+//PINS BOMBILLOS
 int bombillo1 = 6;
 int bombillo2 = 7;
 int bombillo3 = 8;
-int infrarojo = 2;//ASIGNAR ESTE PIN
+int infrarojo = 2;
+int buzzer = 5;
+//PINS DEL LED RGB
+int lred = 11;
+int lgreen = 10;
+int lblue = 9;
+//Tiempos 
+String fecha = "";
+String hora = "";
 
 LiquidCrystal_I2C lcd(0x3F, 16, 2);
 IRrecv irrecv(infrarojo);
 decode_results results;
+DS1302 rtc(2, 3, 4); //Esto debe cambiar
 
 void setup() {
   Serial.begin(9600);
@@ -22,11 +33,18 @@ void setup() {
   lcd.backlight();
   lcd.clear();
   lcd.setCursor(0, 0);
-
-  pinMode(ledAlerta, OUTPUT);
+  rtc.halt(false);
+  rtc.writeProtect(false);
+  rtc.setDOW(WEDNESDAY);
+  rtc.setTime(11, 13, 01);
+  rtc.setDate(17, 11, 2017);
+  rtc.writeProtect(true);
   pinMode(bombillo1, OUTPUT);
   pinMode(bombillo2, OUTPUT);
   pinMode(bombillo3, OUTPUT);
+  pinMode(lred, OUTPUT);
+  pinMode(lgreen, OUTPUT);
+  pinMode(lblue, OUTPUT);
   digitalWrite(bombillo1, LOW);
   digitalWrite(bombillo2, LOW);
   digitalWrite(bombillo3, LOW);
@@ -34,14 +52,16 @@ void setup() {
 }
 
 void loop() {
-  float P = get_potencia(); // P=IV watts
+  get_fecha();
+  control();
+  float p = get_potencia();
   escribir_potencia();
+  verificar(p);
+  delay(500);
+}
 
-  verificar(P);
-
-  //Verificar si el control ha sido presionado
-  if (irrecv.decode(&results))
-  {
+void control() {
+  if (irrecv.decode(&results)) {
     Serial.println(results.value, HEX);
     switch (results.value) {
       case 0xFF42BD:
@@ -56,15 +76,17 @@ void loop() {
     }
     irrecv.resume();
   }
-  delay(500);
 }
 
 void verificar(int potencia) {
   if (potencia > POTENCIA_MAXIMA) {
-    digitalWrite(ledAlerta, HIGH);
+    analogWrite(buzzer,2000);
+    colors('r');
     delay(10000);
     digitalWrite(bombillo1, HIGH);
-    digitalWrite(ledAlerta, LOW);
+    colors('g');
+  }else if(potencia > POTENCIA_MAXIMA -5){
+    colors('y');
   }
 }
 
@@ -79,8 +101,8 @@ float get_corriente(int puerto)
   {
     voltajeSensor = analogRead(puerto) * (5.0 / 1023.0);//lectura del sensor
     corriente = 0.9 * corriente + 0.1 * ((voltajeSensor - 2.515) / sensibilidad); //Ecuación  para obtener la corriente
-    if (corriente > Imax)Imax = corriente;
-    if (corriente < Imin)Imin = corriente;
+    if (corriente > Imax) Imax = corriente;
+    if (corriente < Imin) Imin = corriente;
   }
   return (((Imax - Imin) / 2) - offset);
 }
@@ -104,3 +126,79 @@ void escribir_potencia() {
   lcd.print(get_potencia());
   lcd.print("W");
 }
+
+void get_fecha() {
+  fecha = rtc.getDateStr(FORMAT_LONG, FORMAT_LITTLEENDIAN, '/');
+  hora = rtc.getTimeStr();
+}
+
+void colors(char color) {
+  switch (color) {
+    case 'y':
+      analogWrite(lred, 255);
+      analogWrite(lgreen, 255);
+      analogWrite(lblue, 0);
+      break;
+    case 'g':
+      analogWrite(lred, 0);
+      analogWrite(lgreen, 255);
+      analogWrite(lblue, 0);
+      break;
+    case 'r':
+      analogWrite(lred, 255);
+      analogWrite(lgreen, 0);
+      analogWrite(lblue, 0);
+      break;
+  }
+}
+
+void guardarTotalPotencia(){
+  int segundos = getValue(hora,':',2).toInt();
+  if (segundos % 15 == 0){
+    mandar();//HAY QUE IMPLEMENTAR ESTE MÉTODO
+    potenciaDia += get_potencia();
+  }else if(segundos == 0){
+    int dia = getValue(fecha, '/',0).toInt();
+    rtc.setDate(++dia, 11, 2017);  
+  }
+}
+
+//MANDA EL VALOR DE POTENCIA ACTUAL A LA BASE DE DATOS
+void mandar(){
+  
+}
+
+//Parecido a split de java
+String getValue(String data, char separator, int index) {
+    int found = 0;
+    int strIndex[] = { 0, -1 };
+    int maxIndex = data.length() - 1;
+    for (int i = 0; i <= maxIndex && found <= index; i++) {
+        if (data.charAt(i) == separator || i == maxIndex) {
+            found++;
+            strIndex[0] = strIndex[1] + 1;
+            strIndex[1] = (i == maxIndex) ? i+1 : i;
+        }
+    }
+    return found > index ? data.substring(strIndex[0], strIndex[1]) : "";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
