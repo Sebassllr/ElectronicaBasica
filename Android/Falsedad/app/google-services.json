@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "170456787564",
+    "firebase_url": "https://prueba-web-1b0dc.firebaseio.com",
+    "project_id": "prueba-web-1b0dc",
+    "storage_bucket": "prueba-web-1b0dc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:170456787564:android:177d2d60c34947e3",
+        "android_client_info": {
+          "package_name": "edu.proyecto.tecze.falsedad"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "170456787564-uqtbqui8tjv1vda0diu8v3pkd8qd1sb0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjNXxi3WIFFkJpolNgNnw4ISinP3Yne6w"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
